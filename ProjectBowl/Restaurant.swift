@@ -8,6 +8,10 @@
 
 import Foundation
 
+public enum PriceRange: Int{
+    case cheap = 1, normal, expensive
+}
+
 class Restaurant
 {
     init(restaurantName: String)
@@ -16,6 +20,5 @@ class Restaurant
     }
     
     var restaurantName : String
-
 }
 

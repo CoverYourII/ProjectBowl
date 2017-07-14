@@ -11,7 +11,7 @@ import UIKit
 class RestaurantsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     var restaurants: [Restaurant]?
-    var restaurantsFinder: RestaurantsFinder = RestaurantsFinder()
+    var restaurantsFinder = RestaurantsFinder()
     
     @IBOutlet weak var restaurantsTable: UITableView!
     
@@ -23,7 +23,7 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
         restaurantsTable.delegate = self
         
         // Do any additional setup after loading the view, typically from a nib.
-        self.restaurants = restaurantsFinder.searchForRestaurants("Chinese")
+        self.restaurants = restaurantsFinder.searchForRestaurants(category: "Chinese", priceRange: PriceRange.cheap)
         self.restaurantsTable.reloadData()
         
         if restaurants != nil
@@ -41,23 +41,32 @@ class RestaurantsViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if restaurants != nil
-        {
-            return restaurants!.count
-        }
-        else
-        {
-            return 0
-        }
+return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = restaurantsTable.dequeueReusableCell(withIdentifier: "RestaurantTableCell", for: indexPath) as! RestaurantTableCell
         
-        if restaurants != nil
-        {
-            cell.restaurant = restaurants![indexPath.row]
-        }
+//        if(indexPath.section == 0)
+//        {
+//            let cell = restaurantsTable.dequeueReusableCell(withIdentifier: "RestaurantFilterTableCell", for: indexPath) as! RestaurantFilterTableCell
+//            
+//            return cell
+//        }
+//        else
+//        {
+//            let cell = restaurantsTable.dequeueReusableCell(withIdentifier: "RestaurantTableCell", for: indexPath) as! RestaurantTableCell
+//            
+//            if restaurants != nil
+//            {
+//                cell.restaurant = restaurants![indexPath.row]
+//            }
+//            
+//            return cell
+//        }
+        
+        let cell = restaurantsTable.dequeueReusableCell(withIdentifier: "RestaurantFilterTableCell", for: indexPath) as! RestaurantFilterTableCell
+        
+        
         
         return cell
     }
